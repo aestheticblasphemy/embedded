@@ -27,3 +27,9 @@
     This must read 1
 
 That is all.
+
+P.S.: Don't forget to unexport the GPIO pins back from the user.
+```
+cd /sys/class/gpio
+echo 45 > unexport
+```
