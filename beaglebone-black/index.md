@@ -7,4 +7,5 @@
 | 3     | Take input from user (Switch)         | 20 minutes     |
 | 4     | Build a timer based LED               | 20 minutes     |
 | 5     | Python version of `Hello World`       | 20 minutes     |
+| 6     | Python read input                     | 20 minutes     |
 
