@@ -10,4 +10,5 @@
 | 6     | Python read input                     | 20 minutes     |
 | 7     | Analog Input                          | 20 minutes     |
 | 8     | Pulse Width modulation                | 20 minutes     |
+| 9     | Emailing with Python                  | 40 minutes     |
 

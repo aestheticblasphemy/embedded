@@ -3,7 +3,7 @@
 3. Place switch on breadboard. (Terminals on the same face are input and output ports. Across might be shorted).
 4. Connect one end of Switch to Positive Power Rail.
 5. Connect other end of switch to GND via 10k resistor.
-6. Connect Pin 11 on Port P8 (GPIO\_1\_13) to negative terminal of switch (parallel to the 10k resistor.) This is a pulldown circuit which pulls the voltage on Pin 13 to 0 when no input is applied. This is to avoid any floating point condition. [For Pin to internal Pin Mapping, refer to table 18, P-103 of BBB-SRM]
+6. Connect Pin 11 on Port P8 (GPIO\_1\_13) to negative terminal of switch (parallel to the 10k resistor.) This is a pulldown circuit which pulls the voltage on Pin 11 to 0 when no input is applied. This is to avoid any floating point condition. [For Pin to internal Pin Mapping, refer to table 18, P-103 of BBB-SRM]
 7. Power On the beaglebone and export the GPIO\1_\13 as Number 45 in Linux (32x1+13)
     ```
     ssh root@192.168.7.2
