@@ -11,4 +11,7 @@
 | 7     | Analog Input                          | 20 minutes     |
 | 8     | Pulse Width modulation                | 20 minutes     |
 | 9     | Emailing with Python                  | 40 minutes     |
-
+| 10    | BoneScript - LED Blink                | 20 minutes     |
+| 11    | Bonescript - Reading input            | 20 minutes     |
+| 12    | Bonescript - Summing it up with Analog| 30 minutes     |
+|-------|---------------------------------------|----------------|
