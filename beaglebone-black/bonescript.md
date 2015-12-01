@@ -84,4 +84,53 @@ The two codes listed above are nearly identical, except for the placement of tha
    ```
 
    > Note that while trying to run this code from the Cloud interface, I was unable to get the desired result. I tried running the older blinking LED code too, which had worked earlier, and that too did not work. It could be the case that the IDE did not load properly. In such cases, what one can do is log into the shell and run the code from command line. This can be done as simply as typing `node <filename.js>`. Doing so gave me the desired outputs.
+   
+   To see how JS makes it easy to have asynchronous nature in code, we'll now smash the two codes into one. That is, we'll keep on blinking the `P8_13` at 1 seconds interval, and if at a certain time, we press the button, the `USR3` LED will also light up as long as we keep the button pressed, while the Blinking of `P8_13` continues.
 
+   ```javascript
+  var b = require('bonscript');
+
+  var ledPin = "USR3";
+  var ledPin2 = "P8_13";
+  var inputPin = "P8_11";
+
+  b.pinMode(ledPin, b.OUTPUT);
+  b.pinMode(ledPin2, b.OUTPUT);
+  b.pinMode(inputPin, b.INPUT);
+
+  b.attachInterrupt(inputPin, true, b.CHANGE, alertUser);
+
+  var state = b.LOW;
+  b.digitalWrite(ledPin2, state);
+
+  setInterval(toggle, 1000);
+
+  function toggle(){
+    if(state == b.LOW){
+      state = b.HIGH;
+    }
+    else{
+      state = b.LOW;
+    }
+    b.digitalWrite(ledPin2, state);
+  }
+
+  function alertUser(x){
+    if(x.value == b.HIGH){
+      console.log("Pin is High.");
+      b.digitalWrite(ledPin, b.HIGH);
+    }
+    else{
+      console.log("Pin is Low");
+      b.digitaWrite(ledPin, b.LOW);
+    }
+  }
+   ```
+Simple?
+The `attachInterrput` needs further elucidation. As we can see, it takes 4 inputs. These are `(pin, handler, mode, callback)`,
+  * `pin`: Pin being attached to.
+  * `handler`: Sets when to execute the callback function. If set to `true` as we did here, the callback will always be invoked.
+  * `mode`: Tells the change that we are trying to monitor on the pin. Can be `RISING` edge, `FALLING` edge or `CHANGE` which is inclusive of the other two.
+  * `callback` function is the method or routine that will be called. It will be passed the pin object on which change occurred.
+
+ 
