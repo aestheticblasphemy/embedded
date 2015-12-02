@@ -134,3 +134,46 @@ The `attachInterrput` needs further elucidation. As we can see, it takes 4 input
   * `callback` function is the method or routine that will be called. It will be passed the pin object on which change occurred.
 
  
+  * Reading Analog input
+    
+    ```javascript
+    var b = require('bonescript');
+
+    var inputPin = "P9_32";
+
+    loop();
+
+    function loop(){
+      b.analogRead(inputPin, printValue);
+      setTimeout(loop, 1000);
+    }
+
+    function printValue(x){
+      console.log(x.value);
+    }
+    ```
+  `analogRead` is much like `digitalRead`, the only difference being that the input is connected as an Analog Input pin. And look! Here, we did not even have to do something parallel to `ADC.setup()`. 
+
+  Also, worthy of notice is its subtle difference in looping. In a previous variant, we scheduled the function to be scheduled every 1 second, irrespective of whether we were done executing it the last time or not. That is because we had used the `setInterval` method in our main body. Here, we use `setTimeout` _inside_ the called function itself. Thus, the function is first executed to completion, and before it exit, we called the `setTimeout` which schedules it to run again _once_ after one second. 
+
+  This is the difference between `setInterval` and `setTimeout`. While the `setInterval` executes repeatedly after the given interval elapses, `setTimout` will run only once, unless it is called again.
+
+  * Writing Analog Output (PWM)
+  What do you expect? Given the close analogy of APIs, shouldn't it be `analogWrite()`? It is! `analogWrite(<pin>, <callback>)`. `<pin>` is the name of the pin to write to, and `<callback>` is the method to invoke and pass the pin object to when we are done writing the output. It is optional, since we might not want to do anything about it!
+
+  Now, note that it is a digital device. Thus, it cannot produce an analog output. By the use of ADC, we were able to sample the analog input and approximate it as a digital signal. Likewise, we could use a [DAC](https://en.wikipedia.org/wiki/Digital-to-analog_converter), and produce an Analog output for digital input. But, the BeagleBone does not have a DAC. Also, there is a problem with that. A DAC needs many input lines (one for each bit). So, if we were to use a DAC, say, an 8 bit DAC, we'd require to use 8 GPIOs to actuate that signal. Not good!
+
+  Thus, `analogWrite` could be a misnomer (but is consistent with the naming nomenclature). Instead, what we can do is vary the duty cycle of digital output, to produce an output whose pulse width is modulated. This PWM output can then be used to recreate an analog output by additional circuitry \([PWM to Analog](http://www.ti.com/lit/an/spraa88a/spraa88a.pdf)\). So, currently, we will deal with creating PWM, and leave PWM to Analog conversion for some time else.
+
+  ```javascript
+  var b = require('bonescript');
+
+  var ledPin = "P8_13";
+
+  b.pinMode(ledPin, b.OUTPUT);
+  b.analogWrite(ledPin, 0.05);
+  ```
+
+  Note that the pin is set as digital output pin, but `analogWrite` is used on it. This is because what we are actually doing is sending a pulsating digital output on this pin (which can then be converted into analog). The duty cycle of this output is 5%, i.e., the pulse stays on for a fraction of 5 percent, and remains off 95% of the time. Changing this duty cycle will vary the intensity with which our LED glows. We leave that part as a simple exercise of connecting the dots for our reader. (if you run into problems, you can always ask :-)).
+
+  Note that you can set your javascripts to autorun, drop it into the `autorun` directory within `cloud9` directory. All scripts (with extension of `.js`) in that directory are set to autorun on startup. It is however, up to you to ensure that your code loops properly.
