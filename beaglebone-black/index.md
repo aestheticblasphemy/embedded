@@ -14,4 +14,7 @@
 | 10    | BoneScript - LED Blink                | 20 minutes     |
 | 11    | Bonescript - Reading input            | 20 minutes     |
 | 12    | Bonescript - Summing it up with Analog| 60 minutes     |
+| 13	| Going online with flask               | 120 minutes    |
+| 14    | Logging into the cloud		|                |
+| 15    | Making our own platform on the cloud  |                |
 |-------|---------------------------------------|----------------|
