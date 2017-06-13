@@ -1,4 +1,4 @@
-##Setup Instructions:
+## Setup Instructions:
 
 * Install AVR-Tools: 
 ```
@@ -60,3 +60,17 @@ avr-objcopy -j .text -j .data -O ihex blinky.o  blinky.hex
 ```
 avrdude -c usbasp -p m16 -u -U flash:w:blinky.hex
 ```
+
+## Update
+
+The most recent version of eclipse (Neon) seems to have some trouble using the detect MCU functionality. It throws the following output:
+
+```
+AVRDude Error
+Could not understand the output from AVRDude...
+```
+
+If you also encounter this problem, look into the console logs. 
+To enable AVR Dude internal logs on to eclipse console, go to windows>preferences>AVR>AVRDude and click on the 'Log internal AVRDude output to console.'
+
+In my case, it turned out to be a minimal nuisance that the AVRDude was somehow triggered twice, first with the config that I had set, and then with another device settings. This different device caused the error. So, I just ignored this error and went ahead with programming the device. It worked.
