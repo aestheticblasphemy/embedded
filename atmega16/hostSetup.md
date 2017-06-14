@@ -74,3 +74,20 @@ If you also encounter this problem, look into the console logs.
 To enable AVR Dude internal logs on to eclipse console, go to windows>preferences>AVR>AVRDude and click on the 'Log internal AVRDude output to console.'
 
 In my case, it turned out to be a minimal nuisance that the AVRDude was somehow triggered twice, first with the config that I had set, and then with another device settings. This different device caused the error. So, I just ignored this error and went ahead with programming the device. It worked.
+
+---
+
+* As a side note, it is good practice to document the code. But that is too tedious. Now that we're sure we want to use Eclipse, installing the Elcox plugin would do us good .(Here)[https://mcuoneclipse.com/2012/06/25/5-best-eclipse-plugins-1-eclox-with-doxygen-graphviz-and-mscgen/]
+* Also install `GraphViz` package.
+
+*Write code. Enjoy!
+
+
+***
+
+##8051 Variant
+
+* Install MCU 8051 IDE
+* https://sourceforge.net/projects/p89pgm/
+* untar and `make`
+
